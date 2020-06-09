@@ -20,6 +20,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	compile 'org.springframework.boot:spring-boot-starter-webflux'
 	compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
+	compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.10.0'
+
 }
 
 test {
