@@ -20,7 +20,7 @@ public class FirebaseConfiguration {
   @Value("${firebase.path}")
   private String path;
 
-  @Value(value = "classpath:google-services.json")
+  @Value(value = "google-credentials.json")
   private Resource gservicesConfig;
 
   @Value("${firebase.database-url}")
