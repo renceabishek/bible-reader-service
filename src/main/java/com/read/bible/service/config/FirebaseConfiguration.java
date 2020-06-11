@@ -7,6 +7,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import java.io.FileInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +21,6 @@ public class FirebaseConfiguration {
   @Value("${firebase.path}")
   private String path;
 
-  @Value(value = "classpath:google-credentials.json")
-  private Resource gservicesConfig;
 
   @Value("${firebase.database-url}")
   private String databaseUrl;
@@ -32,7 +31,7 @@ public class FirebaseConfiguration {
   @Bean
   public FirebaseApp provideFirebaseOptions() throws IOException {
     FirebaseOptions options = new FirebaseOptions.Builder()
-        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
+        .setCredentials(GoogleCredentials.fromStream((new FileInputStream("google-credentials.json"))))
         .setDatabaseUrl(databaseUrl)
         .setStorageBucket(storageUrl)
         .build();
@@ -40,14 +39,14 @@ public class FirebaseConfiguration {
     return FirebaseApp.initializeApp(options);
   }
 
-  @Bean
-  @Qualifier("storage-main")
-  public Storage getStorage() throws IOException {
-
-    return StorageOptions.newBuilder()
-        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
-        .build().getService();
-  }
+//  @Bean
+//  @Qualifier("storage-main")
+//  public Storage getStorage() throws IOException {
+//
+//    return StorageOptions.newBuilder()
+//        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
+//        .build().getService();
+//  }
 
 
   @Bean
