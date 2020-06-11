@@ -30,14 +30,14 @@ public class FirebaseConfiguration {
 
   @Bean
   public FirebaseApp provideFirebaseOptions() throws IOException {
-    FileInputStream ft=new FileInputStream("/google-credentials.json");
+    //FileInputStream ft=new FileInputStream("/google-credentials.json");
     FileInputStream f1=new FileInputStream("google-credentials.json");
-    FileInputStream f2=new FileInputStream("./google-credentials.json");
-    System.out.println("file details ->"+ft.available());
+    //FileInputStream f2=new FileInputStream("./google-credentials.json");
+    //System.out.println("file details ->"+ft.available());
     System.out.println("file1 details ->"+f1.available());
-    System.out.println("file2 details ->"+f2.available());
+    //System.out.println("file2 details ->"+f2.available());
     FirebaseOptions options = new FirebaseOptions.Builder()
-        .setCredentials(GoogleCredentials.fromStream((ft)))
+        .setCredentials(GoogleCredentials.fromStream((f1)))
         .setDatabaseUrl(databaseUrl)
         .setStorageBucket(storageUrl)
         .build();
