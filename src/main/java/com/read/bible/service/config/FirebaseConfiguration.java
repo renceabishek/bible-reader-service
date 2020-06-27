@@ -29,21 +29,18 @@ public class FirebaseConfiguration {
   private String storageUrl;
 
   @Value("${GOOGLE_CREDENTIALS}")
-  private Object gservicesConfig;
+  private Resource gservicesConfig;
 
   @Bean
   public FirebaseApp provideFirebaseOptions() throws IOException {
 
-    System.out.println("checking object "+gservicesConfig);
-    return null;
-
-    /*FirebaseOptions options = new FirebaseOptions.Builder()
+    FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
         .setDatabaseUrl(databaseUrl)
         .setStorageBucket(storageUrl)
         .build();
 
-    return FirebaseApp.initializeApp(options);*/
+    return FirebaseApp.initializeApp(options);
   }
 
 //  @Bean
