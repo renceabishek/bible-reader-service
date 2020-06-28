@@ -7,8 +7,11 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,13 +32,15 @@ public class FirebaseConfiguration {
   private String storageUrl;
 
   @Value("${GOOGLE_CREDENTIALS}")
-  private Resource gservicesConfig;
+  private String gservicesConfig;
 
   @Bean
   public FirebaseApp provideFirebaseOptions() throws IOException {
+    JSONObject jsonObject = new JSONObject(gservicesConfig.toString());
+    InputStream is = new ByteArrayInputStream(jsonObject.toString().getBytes());
 
     FirebaseOptions options = new FirebaseOptions.Builder()
-        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
+        .setCredentials(GoogleCredentials.fromStream((is)))
         .setDatabaseUrl(databaseUrl)
         .setStorageBucket(storageUrl)
         .build();
