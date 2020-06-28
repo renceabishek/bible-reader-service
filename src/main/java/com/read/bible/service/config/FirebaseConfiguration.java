@@ -38,7 +38,7 @@ public class FirebaseConfiguration {
   public FirebaseApp provideFirebaseOptions() throws IOException {
     JSONObject jsonObject = new JSONObject(gservicesConfig.toString());
     InputStream is = new ByteArrayInputStream(jsonObject.toString().getBytes());
-
+    System.out.println("input --> "+is.available());
     FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream((is)))
         .setDatabaseUrl(databaseUrl)

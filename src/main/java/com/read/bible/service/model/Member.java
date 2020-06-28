@@ -14,6 +14,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Member {
 
-  @JsonIgnore
   private String name;
 }

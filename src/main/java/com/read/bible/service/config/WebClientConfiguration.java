@@ -1,5 +1,6 @@
 package com.read.bible.service.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Component
 public class WebClientConfiguration {
 
-  public WebClientConfiguration() {}
+  public WebClientConfiguration() {
+  }
 
   @Value("${firebase.database-url}")
   private String firebaseUrl;
@@ -21,7 +23,12 @@ public class WebClientConfiguration {
         .build();
   }
 
-  @Bean public ObjectMapper objectMapper() {
-    return new ObjectMapper().disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);}
+  @Bean
+  public ObjectMapper objectMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+    objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    return objectMapper;
+  }
 
 }
