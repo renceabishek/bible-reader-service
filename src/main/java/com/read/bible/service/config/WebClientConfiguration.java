@@ -1,5 +1,7 @@
 package com.read.bible.service.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -18,5 +20,8 @@ public class WebClientConfiguration {
     return webClient.baseUrl(firebaseUrl)
         .build();
   }
+
+  @Bean public ObjectMapper objectMapper() {
+    return new ObjectMapper().disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);}
 
 }
