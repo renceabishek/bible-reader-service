@@ -47,25 +47,4 @@ public class FirebaseConfiguration {
 
     return FirebaseApp.initializeApp(options);
   }
-
-//  @Bean
-//  @Qualifier("storage-main")
-//  public Storage getStorage() throws IOException {
-//
-//    return StorageOptions.newBuilder()
-//        .setCredentials(GoogleCredentials.fromStream((gservicesConfig.getInputStream())))
-//        .build().getService();
-//  }
-
-
-  @Bean
-  @Qualifier("main")
-  public DatabaseReference provideDatabaseReference(FirebaseApp firebaseApp) {
-    FirebaseDatabase
-        .getInstance(firebaseApp)
-        .setPersistenceEnabled(false);
-    return FirebaseDatabase
-        .getInstance(firebaseApp)
-        .getReference();
-  }
 }
